@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Esta página no la hemos abierto — Zapienz</title>
+<meta name="description" content="La página que buscabas no existe en Zapienz. Te regresamos al inicio y al catálogo de 305 libros resumidos en español.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#F2EDE3">
+<link rel="icon" href="/zapienz/assets/app/icon-512.png" sizes="512x512">
+<link rel="apple-touch-icon" href="/zapienz/assets/app/icon-180.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --zp-papel:#F2EDE3; --zp-tinta:#12100D; --zp-grafito:#5A534A;
+  --zp-marca:#F2B705; --zp-marca-tinta:#8A6400; --zp-onda:#19D3C5;
+  --zp-linea:rgba(18,16,13,.14);
+  --e:cubic-bezier(.16,.8,.3,1); --t-ui:.16s;
+  --s4:16px; --s5:24px;
+  --pad:clamp(20px,5vw,64px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--zp-papel); color:var(--zp-tinta);
+  font-family:'Manrope',ui-sans-serif,sans-serif; font-size:17px; line-height:1.62;
+  -webkit-font-smoothing:antialiased; min-height:100svh; overflow-x:clip;
+  display:flex; flex-direction:column}
+img{max-width:100%; height:auto; display:block}
+a{color:inherit}
+:focus-visible{outline:2.5px solid var(--zp-marca); outline-offset:3px; border-radius:4px}
+
+.salta{position:absolute; left:-9999px; top:0; background:var(--zp-tinta); color:var(--zp-papel);
+  padding:10px 16px; border-radius:0 0 8px 0; z-index:9; text-decoration:none}
+.salta:focus{left:0}
+
+.env{width:100%; max-width:1240px; margin-inline:auto; padding-inline:var(--pad)}
+
+.tope{padding-block:clamp(20px,4vw,32px)}
+.marca{display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+  font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:19px; letter-spacing:-.02em}
+.marca img{width:30px; height:30px; border-radius:8px}
+
+main{flex:1; display:flex; align-items:center; padding-block:clamp(28px,7vw,72px)}
+
+.codigo{font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12.5px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--zp-marca-tinta);
+  display:flex; align-items:center; gap:12px; margin:0 0 var(--s5)}
+.codigo::before{content:''; width:34px; height:2px; background:var(--zp-marca); border-radius:2px}
+
+h1{font-family:'Fraunces',Georgia,serif; font-weight:600; line-height:1.03;
+  font-size:clamp(2.15rem,6vw,4.2rem); letter-spacing:-.028em; margin:0 0 var(--s5);
+  max-width:17ch; font-variation-settings:'SOFT' 22,'WONK' 1}
+
+/* El subrayado es la firma del sitio: en el resto de las paginas cubre la palabra
+   entera. Aqui se corta a media palabra y la deja sin terminar, que es exactamente
+   lo que le pasa a esta pagina. El concepto es la estructura, no el adorno. */
+.corta{position:relative; display:inline-block; white-space:nowrap; isolation:isolate}
+.corta::before{content:''; position:absolute; left:-.06em; right:-.06em; bottom:.05em;
+  height:.42em; background:var(--zp-marca); border-radius:2px; z-index:-1;
+  transform:scaleX(0); transform-origin:0 50%;
+  animation:corta 1.35s var(--e) .3s both}
+@keyframes corta{to{transform:scaleX(.56)}}
+
+.plomo{font-size:clamp(1.02rem,1.9vw,1.2rem); color:var(--zp-grafito);
+  max-width:47ch; margin:0 0 clamp(26px,4vw,38px)}
+
+.acciones{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+.btn{display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+  font-weight:700; font-size:15.5px; letter-spacing:-.012em;
+  border:1.5px solid transparent; border-radius:100px; padding:14px 24px;
+  min-height:48px; transition:transform var(--t-ui) var(--e), background var(--t-ui) var(--e)}
+.btn-1{background:var(--zp-tinta); color:var(--zp-papel)}
+.btn-2{border-color:var(--zp-linea); color:var(--zp-tinta)}
+@media (hover:hover) and (pointer:fine){
+  .btn-1:hover{transform:translateY(-2px)}
+  .btn-2:hover{background:rgba(18,16,13,.05)}
+}
+
+.pistas{margin-top:clamp(34px,6vw,54px); padding-top:var(--s5);
+  border-top:1px solid var(--zp-linea); display:grid; gap:var(--s4) clamp(24px,4vw,40px);
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); max-width:900px}
+.pista{margin:0; font-size:14.5px; color:var(--zp-grafito)}
+.pista b{display:block; font-weight:700; color:var(--zp-tinta); font-size:15px; margin-bottom:2px}
+.pista a{color:var(--zp-marca-tinta); text-decoration-thickness:1.5px; text-underline-offset:3px}
+
+/* La ley cromatica del sitio tambien rige aqui: teal = escuchar. */
+.pista.audio b::after{content:''; display:inline-block; width:7px; height:7px; margin-left:8px;
+  border-radius:50%; background:var(--zp-onda); vertical-align:middle}
+
+footer{padding-block:clamp(20px,4vw,32px); font-size:13.5px; color:var(--zp-grafito)}
+
+@media (prefers-reduced-motion:reduce){
+  .corta::before{animation:none; transform:scaleX(.56)}
+  .btn{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="salta" href="#principal">Saltar al contenido</a>
+
+<header class="tope">
+  <div class="env">
+    <a class="marca" href="/zapienz/">
+      <img src="/zapienz/assets/app/icon-180.webp" alt="" width="30" height="30">
+      Zapienz
+    </a>
+  </div>
+</header>
+
+<main id="principal">
+  <div class="env">
+    <p class="codigo">Error 404</p>
+    <h1>Esta página no la hemos <span class="corta">abierto</span>.</h1>
+    <p class="plomo">Abrimos 305 libros, pero esta dirección no es ninguno de ellos.
+      Puede que el enlace esté mal escrito, o que la página ya no exista.</p>
+
+    <div class="acciones">
+      <a class="btn btn-1" href="/zapienz/">Volver al inicio</a>
+      <a class="btn btn-2" href="/zapienz/#catalogo">Ver el catálogo</a>
+    </div>
+
+    <div class="pistas">
+      <p class="pista"><b>¿Buscabas un libro?</b>
+        El catálogo completo vive dentro de la app, no en el sitio.
+        <a href="https://apps.apple.com/mx/app/zapienz/id6762142820">Descárgala gratis</a>.</p>
+      <p class="pista audio"><b>¿Buscabas el audio?</b>
+        Cada Zap se lee o se escucha, y las dos formas están en la misma app.</p>
+      <p class="pista"><b>¿Algo no cuadra?</b>
+        Escríbenos a <a href="mailto:contactozapienz@gmail.com">contactozapienz@gmail.com</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="env">Zapienz — resúmenes de libros en español, para leer o escuchar.</div>
+</footer>
+</body>
+</html>
