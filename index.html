@@ -104,6 +104,9 @@ section{position:relative}
 /* ─────────── NAV ─────────── */
 .nav{position:fixed; inset:0 0 auto; z-index:50; background:rgba(242,237,227,0);
   border-bottom:1px solid transparent; transition:background .4s var(--e),border-color .4s var(--e)}
+.nav.noche{background:rgba(7,11,16,.72); border-bottom-color:var(--zp-linea-n);
+  -webkit-backdrop-filter:blur(16px) saturate(1.04); backdrop-filter:blur(16px) saturate(1.04)}
+@supports not (backdrop-filter:blur(1px)){.nav.noche{background:rgba(7,11,16,.94)}}
 .nav.solid{background:rgba(242,237,227,.86); border-bottom-color:var(--zp-linea);
   -webkit-backdrop-filter:blur(18px) saturate(1.06); backdrop-filter:blur(18px) saturate(1.06)}
 @supports not (backdrop-filter:blur(1px)){.nav.solid{background:rgba(242,237,227,.985)}}
@@ -1139,6 +1142,8 @@ var portada = function(f){ return 'assets/portadas/'+f+'.webp'; };
   var nav = document.getElementById('nav'), arriba = document.getElementById('arriba');
   function alScroll(){
     var y = scrollY;
+    // .noche entra antes de que el titular del hero alcance la barra; .solid ya en papel
+    nav.classList.toggle('noche', y > innerHeight * .30 && y <= innerHeight * .82);
     nav.classList.toggle('solid', y > innerHeight * .82);
     arriba.classList.toggle('on', y > innerHeight * 1.6);
   }
