@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/video/hero-poster.webp" fetchpriority="high">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://gamalabs26.github.io/zapienz/#org","name":"Zapienz","email":"contactozapienz@gmail.com","url":"https://gamalabs26.github.io/zapienz/","logo":"https://gamalabs26.github.io/zapienz/assets/app/icon-512.png","sameAs":["https://www.instagram.com/zapienz_latam","https://apps.apple.com/mx/app/zapienz/id6762142820"]},
@@ -37,17 +37,21 @@
 <style>
 /* ─────────── SISTEMA ─────────── */
 :root{
-  --zp-papel:#F2EDE3;      /* sustrato */
-  --zp-papel-2:#E7DFD1;
-  --zp-tinta:#12100D;      /* texto */
-  --zp-grafito:#5A534A;    /* secundario */
-  --zp-marca:#F2B705;      /* LEER  — marcatextos */
-  --zp-marca-tinta:#8A6400; /* el mismo amarillo, entintado, para TEXTO sobre papel (4.6:1) */
-  --zp-onda:#19D3C5;       /* ESCUCHAR — audio */
-  --zp-noche:#0B0F14;      /* modo escucha */
-  --zp-noche-2:#141A21;
-  --zp-linea:rgba(18,16,13,.14);
-  --zp-linea-n:rgba(242,237,227,.16);
+  /* Paleta de la marca, medida en sus propios activos, no inventada:
+     el sitio oficial (zapienz.gamalabs.mx) corre sobre #04070D con acento
+     #38EB6B, y el icono de la app es #183048 + #48C078. La marca es OSCURA
+     con verde; el crema es su color de TEXTO, no de fondo. */
+  --zp-papel:#0D1726;      /* sustrato base (antes crema: era invencion mia) */
+  --zp-papel-2:#16233A;    /* superficie elevada sobre el sustrato */
+  --zp-tinta:#FAF6EE;      /* TEXTO — el crema de la marca */
+  --zp-grafito:#9DAAC0;    /* secundario, azulado como su sistema */
+  --zp-marca:#38EB6B;      /* verde de Zapienz — LEER/acento */
+  --zp-marca-tinta:#38EB6B; /* sobre fondo oscuro el verde ya contrasta: no hay que entintarlo */
+  --zp-onda:#19D3C5;       /* ESCUCHAR — teal, tambien de su CSS */
+  --zp-noche:#04070D;      /* el negro azulado exacto de su sitio */
+  --zp-noche-2:#0A111C;
+  --zp-linea:rgba(250,246,238,.14);
+  --zp-linea-n:rgba(250,246,238,.16);
 
   --e:cubic-bezier(.16,.8,.3,1);
   --t-ui:.16s; --t-rev:.7s;
@@ -62,14 +66,14 @@
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0; background:var(--zp-papel); color:var(--zp-tinta);
-  font-family:'Manrope',ui-sans-serif,sans-serif; font-size:17px; line-height:1.62;
+  font-family:'Inter',ui-sans-serif,sans-serif; font-size:17px; line-height:1.62;
   font-weight:450; letter-spacing:-.006em;
   -webkit-font-smoothing:antialiased; overflow-x:clip;
 }
 img,video{max-width:100%;display:block}
 a{color:inherit}
-h1,h2,h3{font-family:'Fraunces',Georgia,serif; font-weight:600; line-height:1.02;
-  letter-spacing:-.028em; margin:0; font-variation-settings:'SOFT' 22,'WONK' 1,'opsz' 90}
+h1,h2,h3{font-family:'Instrument Serif',Georgia,serif; font-weight:400; line-height:1.06;
+  letter-spacing:-.018em; margin:0}
 .mono{font-family:'IBM Plex Mono',ui-monospace,monospace; letter-spacing:.02em}
 
 .env{max-width:var(--ancho); margin-inline:auto; padding-inline:var(--pad)}
@@ -88,35 +92,39 @@ section{position:relative}
 .grano-n{mix-blend-mode:screen; opacity:.34}
 
 /* ─────────── MARCATEXTOS (firma) ─────────── */
+/* El gesto de marca de Zapienz: la palabra que sostiene la idea va en VERDE y en
+   italica del serif — asi resuelven cada titular en su sitio oficial ("Toda esta
+   biblioteca, *escuchada*"). Antes yo la tapaba con un bloque de marcatextos
+   amarillo, un color que la marca no usa en ninguna parte. El movimiento se queda,
+   pero ahora dibuja un trazo fino BAJO la palabra en vez de un bloque encima. */
 .sub{position:relative; display:inline-block; isolation:isolate;
-  transition:color .42s .2s var(--e)}
+  font-style:italic; color:var(--zp-marca);
+  transition:color .42s var(--e)}
 .sub .t{position:relative; z-index:1}
 .sub::before{content:''; position:absolute; z-index:0;
-  left:-.14em; right:-.14em; top:.1em; bottom:.04em;
-  background:var(--zp-marca);
-  clip-path:polygon(0% 8%, 32% 2%, 71% 6%, 100% 0%, 99% 88%, 64% 97%, 26% 92%, .8% 100%);
+  left:-.04em; right:-.04em; bottom:-.02em; height:.055em;
+  background:var(--zp-marca); border-radius:2px; opacity:.55;
   transform:scaleX(0); transform-origin:0 50%;
   transition:transform .68s var(--e);
   will-change:transform}
 .sub.on::before{transform:scaleX(1)}
-.sub.on{color:var(--zp-tinta)}
 
 /* ─────────── NAV ─────────── */
-.nav{position:fixed; inset:0 0 auto; z-index:50; background:rgba(242,237,227,0);
+.nav{position:fixed; inset:0 0 auto; z-index:50; background:rgba(13,23,38,0);
   border-bottom:1px solid transparent; transition:background .4s var(--e),border-color .4s var(--e)}
 .nav.noche{background:rgba(7,11,16,.72); border-bottom-color:var(--zp-linea-n);
   -webkit-backdrop-filter:blur(16px) saturate(1.04); backdrop-filter:blur(16px) saturate(1.04)}
 @supports not (backdrop-filter:blur(1px)){.nav.noche{background:rgba(7,11,16,.94)}}
-.nav.solid{background:rgba(242,237,227,.86); border-bottom-color:var(--zp-linea);
+.nav.solid{background:rgba(13,23,38,.88); border-bottom-color:var(--zp-linea);
   -webkit-backdrop-filter:blur(18px) saturate(1.06); backdrop-filter:blur(18px) saturate(1.06)}
-@supports not (backdrop-filter:blur(1px)){.nav.solid{background:rgba(242,237,227,.985)}}
+@supports not (backdrop-filter:blur(1px)){.nav.solid{background:rgba(13,23,38,.985)}}
 .nav .env{display:flex; align-items:center; gap:var(--s5); height:66px}
 .marca{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
-  font-size:19px; letter-spacing:-.03em; color:var(--zp-papel); transition:color .4s var(--e)}
+  font-size:19px; letter-spacing:-.03em; color:var(--zp-tinta); transition:color .4s var(--e)}
 .nav.solid .marca{color:var(--zp-tinta)}
 .marca img{width:30px;height:30px;border-radius:8px}
 .nav-links{display:flex; gap:var(--s5); margin-left:auto; list-style:none; padding:0; margin-block:0}
-.nav-links a{text-decoration:none; font-size:14.5px; font-weight:550; color:var(--zp-papel);
+.nav-links a{text-decoration:none; font-size:14.5px; font-weight:550; color:var(--zp-tinta);
   opacity:.82; transition:opacity var(--t-ui) var(--e),color .4s var(--e)}
 .nav.solid .nav-links a{color:var(--zp-tinta); opacity:.66}
 .nav-links a:hover{opacity:1}
@@ -128,20 +136,20 @@ section{position:relative}
   font-weight:700; font-size:15.5px; letter-spacing:-.012em; border:1.5px solid transparent;
   transition:transform var(--t-ui) var(--e), background var(--t-ui) var(--e),
              color var(--t-ui) var(--e), box-shadow var(--t-ui) var(--e); will-change:transform}
-.btn-1{background:var(--zp-marca); color:var(--zp-tinta);
-  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 8px 20px -10px rgba(18,16,13,.5)}
+.btn-1{background:var(--zp-marca); color:var(--zp-noche);
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 8px 20px -10px rgba(0,0,0,.5)}
 .btn-2{background:transparent; color:var(--zp-tinta); border-color:var(--zp-linea)}
-.btn-n{background:transparent; color:var(--zp-papel); border-color:var(--zp-linea-n)}
+.btn-n{background:transparent; color:var(--zp-tinta); border-color:var(--zp-linea-n)}
 @media (hover:hover) and (pointer:fine){
-  .btn-1:hover{box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 14px 28px -12px rgba(18,16,13,.6)}
+  .btn-1:hover{box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 14px 28px -12px rgba(0,0,0,.6)}
   .btn-2:hover{background:var(--zp-tinta); color:var(--zp-papel); border-color:var(--zp-tinta)}
-  .btn-n:hover{background:var(--zp-papel); color:var(--zp-tinta); border-color:var(--zp-papel)}
+  .btn-n:hover{background:var(--zp-tinta); color:var(--zp-papel); border-color:var(--zp-tinta)}
 }
 .btn:active{transform:scale(.975)}
 .btn svg{flex:none}
 
 /* ─────────── HERO ─────────── */
-.hero{min-height:100svh; background:var(--zp-noche); color:var(--zp-papel);
+.hero{min-height:100svh; background:var(--zp-noche); color:var(--zp-tinta);
   display:flex; align-items:flex-end; overflow:clip; position:relative}
 .hero-video{position:absolute; inset:-8% -4%; z-index:0; will-change:transform}
 .hero-video video,.hero-video img{width:100%; height:100%; object-fit:cover}
@@ -149,27 +157,27 @@ section{position:relative}
   background:
     radial-gradient(120px 80px at 22% 34%, rgba(242,183,5,.13), transparent 70%),
     radial-gradient(180px 120px at 74% 22%, rgba(25,211,197,.10), transparent 72%),
-    radial-gradient(90px 60px at 58% 66%, rgba(242,237,227,.08), transparent 70%)}
+    radial-gradient(90px 60px at 58% 66%, rgba(250,246,238,.08), transparent 70%)}
 .hero-scrim{position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
    linear-gradient(96deg, rgba(4,7,11,.95) 0%, rgba(4,7,11,.87) 36%, rgba(4,7,11,.32) 64%, rgba(4,7,11,.58) 100%),
    linear-gradient(to top, rgba(4,7,11,.96) 0%, rgba(4,7,11,.76) 20%, rgba(4,7,11,.2) 44%, rgba(4,7,11,0) 60%)}
 .hero .env{position:relative; z-index:3; padding-block:clamp(96px,14vh,150px) clamp(40px,7vh,72px); width:100%; will-change:transform}
 .hero-pill{display:inline-flex; align-items:center; gap:9px; font-size:12.5px; font-weight:600;
-  letter-spacing:.1em; text-transform:uppercase; color:rgba(242,237,227,.74);
+  letter-spacing:.1em; text-transform:uppercase; color:rgba(250,246,238,.74);
   border:1px solid var(--zp-linea-n); border-radius:100px; padding:7px 15px 7px 11px; margin-bottom:var(--s5)}
 .hero-pill i{width:7px;height:7px;border-radius:50%;background:var(--zp-onda);
   box-shadow:0 0 0 4px rgba(25,211,197,.16)}
 h1{font-size:clamp(2.9rem,7.6vw,6.4rem); max-width:15ch; margin-bottom:var(--s5);
-  font-weight:500; font-variation-settings:'SOFT' 28,'WONK' 1,'opsz' 144}
+  font-weight:400;}
 h1 em{font-style:italic; font-weight:400}
-.hero-sub{max-width:47ch; font-size:clamp(1.02rem,1.35vw,1.19rem); color:rgba(242,237,227,.82);
+.hero-sub{max-width:47ch; font-size:clamp(1.02rem,1.35vw,1.19rem); color:rgba(250,246,238,.82);
   margin:0 0 var(--s6)}
 .hero-cta{display:flex; flex-wrap:wrap; gap:var(--s3) var(--s4); align-items:center}
-.hero-nota{font-size:13.5px; color:rgba(242,237,227,.56)}
+.hero-nota{font-size:13.5px; color:rgba(250,246,238,.56)}
 .hero-abajo{position:absolute; z-index:3; right:var(--pad); bottom:clamp(40px,7vh,72px);
   display:flex; align-items:center; gap:10px; font-size:12px; letter-spacing:.14em;
-  text-transform:uppercase; color:rgba(242,237,227,.5)}
+  text-transform:uppercase; color:rgba(250,246,238,.5)}
 @media (max-width:760px){
   .hero-abajo{display:none}
   /* El libro ocupa la mitad inferior del cuadro 16:9. En vertical, el video se confina
@@ -182,19 +190,19 @@ h1 em{font-style:italic; font-weight:400}
       rgba(4,7,11,.06) 34%, rgba(4,7,11,.55) 45%, rgba(4,7,11,.94) 52%, #0B0F14 57%)}
   .hero .env{padding-block:0 clamp(34px,6vh,58px)}
 }
-.hero-abajo span{display:block;width:1px;height:44px;background:linear-gradient(rgba(242,237,227,.4),transparent);
+.hero-abajo span{display:block;width:1px;height:44px;background:linear-gradient(rgba(250,246,238,.4),transparent);
   animation:baja 2.4s var(--e) infinite}
 @keyframes baja{0%{transform:scaleY(0);transform-origin:0 0}50%{transform:scaleY(1);transform-origin:0 0}
  51%{transform:scaleY(1);transform-origin:0 100%}100%{transform:scaleY(0);transform-origin:0 100%}}
 
 /* ─────────── CIFRAS ─────────── */
-.cifras{background:var(--zp-noche); color:var(--zp-papel); border-top:1px solid var(--zp-linea-n)}
+.cifras{background:var(--zp-noche); color:var(--zp-tinta); border-top:1px solid var(--zp-linea-n)}
 .cifras .env{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--zp-linea-n);
   border-inline:1px solid var(--zp-linea-n)}
 .cifra{background:var(--zp-noche); padding:var(--s6) var(--s5)}
-.cifra b{display:block; font-family:'Fraunces',serif; font-size:clamp(2.1rem,4.2vw,3.15rem);
+.cifra b{display:block; font-family:'Instrument Serif',Georgia,serif; font-size:clamp(2.1rem,4.2vw,3.15rem);
   font-weight:400; line-height:1; letter-spacing:-.03em}
-.cifra span{display:block; margin-top:10px; font-size:13.5px; color:rgba(242,237,227,.6); line-height:1.4}
+.cifra span{display:block; margin-top:10px; font-size:13.5px; color:rgba(250,246,238,.6); line-height:1.4}
 .cifra:nth-child(4) b{color:var(--zp-marca)}
 @media (max-width:760px){.cifras .env{grid-template-columns:repeat(2,1fr)}}
 
@@ -202,13 +210,12 @@ h1 em{font-style:italic; font-weight:400}
 .eyebrow{font-size:12.5px; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
   color:var(--zp-grafito); display:flex; align-items:center; gap:10px; margin-bottom:var(--s5)}
 .eyebrow::before{content:''; width:26px; height:2px; background:var(--zp-marca)}
-.n .eyebrow{color:rgba(242,237,227,.6)}
-h2{font-size:clamp(2.05rem,4.6vw,3.5rem); max-width:19ch; font-weight:500;
-  font-variation-settings:'SOFT' 26,'WONK' 1,'opsz' 120}
+.n .eyebrow{color:rgba(250,246,238,.6)}
+h2{font-size:clamp(2.05rem,4.6vw,3.5rem); max-width:19ch; font-weight:400;}
 h2 em{font-style:italic;font-weight:400}
 .plomo{max-width:56ch; font-size:clamp(1rem,1.2vw,1.13rem); color:var(--zp-grafito); margin-top:var(--s5)}
-.n{background:var(--zp-noche); color:var(--zp-papel)}
-.n .plomo{color:rgba(242,237,227,.72)}
+.n{background:var(--zp-noche); color:var(--zp-tinta)}
+.n .plomo{color:rgba(250,246,238,.72)}
 
 /* ─────────── SOBRE ─────────── */
 .sobre-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(32px,6vw,90px); align-items:start}
@@ -233,10 +240,10 @@ h2 em{font-style:italic;font-weight:400}
   padding:var(--s6); position:relative; overflow:hidden; will-change:transform;
   transition:transform .34s var(--e), box-shadow .34s var(--e)}
 @media (hover:hover) and (pointer:fine){
-  .paso:hover{transform:translateY(-5px); box-shadow:0 22px 44px -26px rgba(18,16,13,.42)}}
+  .paso:hover{transform:translateY(-5px); box-shadow:0 22px 44px -26px rgba(0,0,0,.42)}}
 .paso .num{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--zp-grafito);
   letter-spacing:.14em}
-.paso h3{font-size:1.6rem; margin:var(--s5) 0 var(--s3); font-weight:500}
+.paso h3{font-size:1.6rem; margin:var(--s5) 0 var(--s3); font-weight:400}
 .paso p{margin:0; font-size:15px; color:var(--zp-grafito)}
 .paso .fig{height:112px; margin-top:var(--s6); position:relative}
 /* fig 1 — el libro completo (renglones) */
@@ -256,13 +263,13 @@ h2 em{font-style:italic;font-weight:400}
   text-align:center; pointer-events:none; padding-inline:var(--pad)}
 .muro-tit h2{margin-inline:auto; max-width:16ch}
 .muro-fade{position:absolute; inset:0; z-index:2; pointer-events:none;
-  background:linear-gradient(var(--zp-papel) 2%, rgba(242,237,227,.55) 24%, rgba(242,237,227,0) 48%,
-    rgba(242,237,227,.6) 80%, var(--zp-papel) 100%)}
+  background:linear-gradient(var(--zp-papel) 2%, rgba(13,23,38,.55) 24%, rgba(13,23,38,0) 48%,
+    rgba(13,23,38,.6) 80%, var(--zp-papel) 100%)}
 .fila{display:flex; gap:clamp(12px,1.6vw,22px); width:max-content; will-change:transform}
 .fila+.fila{margin-top:clamp(12px,1.6vw,22px)}
 .port{width:clamp(96px,11vw,150px); aspect-ratio:2/3; border-radius:9px; overflow:hidden;
   background:var(--zp-papel-2); flex:none; will-change:transform;
-  box-shadow:0 12px 30px -18px rgba(18,16,13,.6)}
+  box-shadow:0 12px 30px -18px rgba(0,0,0,.6)}
 .port img{width:100%;height:100%;object-fit:cover}
 .cats{display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s6)}
 .cat{font-size:13.5px; font-weight:600; border:1px solid var(--zp-linea); border-radius:100px;
@@ -302,8 +309,8 @@ h2 em{font-style:italic;font-weight:400}
 .modo .tag{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em;
   text-transform:uppercase}
 .modo.leer .tag{color:var(--zp-marca)} .modo.oir .tag{color:var(--zp-onda)}
-.modo h3{font-size:1.9rem; margin:var(--s4) 0 var(--s3); font-weight:500}
-.modo p{margin:0; color:rgba(242,237,227,.7); font-size:15.5px}
+.modo h3{font-size:1.9rem; margin:var(--s4) 0 var(--s3); font-weight:400}
+.modo p{margin:0; color:rgba(250,246,238,.7); font-size:15.5px}
 .modo .barra{position:absolute; inset:auto 0 0 0; height:3px; transform:scaleX(0); transform-origin:0 50%;
   transition:transform .8s var(--e)}
 .modo.leer .barra{background:var(--zp-marca)} .modo.oir .barra{background:var(--zp-onda)}
@@ -317,9 +324,9 @@ h2 em{font-style:italic;font-weight:400}
   display:grid;place-items:center;flex:none}
 .repro .play svg{margin-left:3px}
 .repro .wave{height:44px; width:100%}
-.repro .wave rect{fill:rgba(242,237,227,.34)}
+.repro .wave rect{fill:rgba(250,246,238,.34)}
 .repro .wave rect.on{fill:var(--zp-onda)}
-.repro .tiempo{font-family:'IBM Plex Mono',monospace; font-size:14px; color:rgba(242,237,227,.7);
+.repro .tiempo{font-family:'IBM Plex Mono',monospace; font-size:14px; color:rgba(250,246,238,.7);
   white-space:nowrap}
 /* La holgura extra no es estetica: el parallax de estas capturas las sube hasta
    59px (tope = vh * k * 0.6) y sin ella mordian el reproductor de arriba. */
@@ -334,11 +341,10 @@ h2 em{font-style:italic;font-weight:400}
   padding:var(--s7) var(--s6); display:flex; flex-direction:column; gap:var(--s5);
   transition:transform .34s var(--e), box-shadow .34s var(--e); will-change:transform}
 @media (hover:hover) and (pointer:fine){
-  .res:hover{transform:translateY(-5px); box-shadow:0 24px 48px -30px rgba(18,16,13,.45)}}
+  .res:hover{transform:translateY(-5px); box-shadow:0 24px 48px -30px rgba(0,0,0,.45)}}
 .estrellas{display:flex; gap:3px; color:var(--zp-marca-tinta)}
-.res blockquote{margin:0; font-family:'Fraunces',serif; font-size:clamp(1.12rem,1.7vw,1.38rem);
-  line-height:1.42; letter-spacing:-.018em; font-weight:400;
-  font-variation-settings:'SOFT' 30,'WONK' 1,'opsz' 60}
+.res blockquote{margin:0; font-family:'Instrument Serif',Georgia,serif; font-size:clamp(1.12rem,1.7vw,1.38rem);
+  line-height:1.42; letter-spacing:-.018em; font-weight:400;}
 .res figcaption{margin-top:auto; font-size:13.5px; color:var(--zp-grafito);
   display:flex; flex-wrap:wrap; gap:6px; align-items:center}
 .res figcaption b{color:var(--zp-tinta); font-weight:650}
@@ -350,9 +356,9 @@ h2 em{font-style:italic;font-weight:400}
 .plan{border:1px solid var(--zp-linea); border-radius:20px; padding:var(--s7) var(--s6);
   display:flex; flex-direction:column}
 .plan.mejor{background:var(--zp-tinta); color:var(--zp-papel); border-color:var(--zp-tinta)}
-.plan h3{font-size:1.85rem; font-weight:500; margin-bottom:var(--s2)}
+.plan h3{font-size:1.85rem; font-weight:400; margin-bottom:var(--s2)}
 .plan .para{font-size:14.5px; color:var(--zp-grafito); margin:0 0 var(--s6)}
-.plan.mejor .para{color:rgba(242,237,227,.66)}
+.plan.mejor .para{color:rgba(13,23,38,.7)}
 .plan ul{list-style:none; padding:0; margin:0 0 var(--s7); display:grid; gap:var(--s3)}
 .plan li{display:grid; grid-template-columns:20px 1fr; gap:var(--s3); font-size:15px; align-items:start}
 .plan li svg{margin-top:5px}
@@ -364,33 +370,33 @@ h2 em{font-style:italic;font-weight:400}
   border:1px solid var(--zp-linea); border-radius:20px; overflow:hidden; margin-top:var(--s8)}
 @media (max-width:820px){.donde{grid-template-columns:1fr}}
 .donde div{background:var(--zp-papel); padding:var(--s6)}
-.donde h3{font-size:1.15rem; font-family:'Manrope',sans-serif; font-weight:700;
+.donde h3{font-size:1.15rem; font-family:'Inter',sans-serif; font-weight:700;
   letter-spacing:-.02em; margin-bottom:var(--s2)}
 .donde p{margin:0; font-size:14.8px; color:var(--zp-grafito)}
 .donde a{color:var(--zp-tinta); text-decoration:underline; text-underline-offset:3px;
   text-decoration-color:var(--zp-marca); text-decoration-thickness:2px}
 
 /* ─────────── CTA FINAL ─────────── */
-.cierre{background:var(--zp-noche); color:var(--zp-papel); text-align:center; overflow:clip;
+.cierre{background:var(--zp-noche); color:var(--zp-tinta); text-align:center; overflow:clip;
   position:relative}
 .cierre .env{position:relative; z-index:2}
 .cierre h2{margin-inline:auto; max-width:18ch; font-size:clamp(2.3rem,5.6vw,4.3rem)}
-.cierre .plomo{margin-inline:auto; text-align:center; color:rgba(242,237,227,.74)}
+.cierre .plomo{margin-inline:auto; text-align:center; color:rgba(250,246,238,.74)}
 .cierre .btn{margin-top:var(--s7)}
 .cierre-luz{position:absolute; inset:0; z-index:1; pointer-events:none; will-change:transform;
   background:radial-gradient(60% 55% at 50% 108%, rgba(242,183,5,.22), transparent 70%),
              radial-gradient(46% 44% at 22% -8%, rgba(25,211,197,.14), transparent 72%)}
 
 /* ─────────── FOOTER ─────────── */
-footer{background:var(--zp-noche); color:rgba(242,237,227,.62); font-size:14.5px;
+footer{background:var(--zp-noche); color:rgba(250,246,238,.62); font-size:14.5px;
   border-top:1px solid var(--zp-linea-n)}
 footer .env{padding-block:var(--s8) var(--s7)}
 .f-top{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:var(--s7)}
 @media (max-width:820px){.f-top{grid-template-columns:1fr 1fr; gap:var(--s6)}
   .f-marca{grid-column:1/-1}}
-.f-marca .marca{color:var(--zp-papel); margin-bottom:var(--s4)}
+.f-marca .marca{color:var(--zp-tinta); margin-bottom:var(--s4)}
 .f-marca p{margin:0; max-width:34ch}
-footer .f-top h3{font-size:12.5px; letter-spacing:.13em; text-transform:uppercase; color:rgba(242,237,227,.6);
+footer .f-top h3{font-size:12.5px; letter-spacing:.13em; text-transform:uppercase; color:rgba(250,246,238,.6);
   margin:0 0 var(--s4); font-weight:700; font-family:'Manrope',sans-serif}
 footer ul{list-style:none; padding:0; margin:0; display:grid; gap:11px}
 /* Minimo tactil de 44px: en pantallas de dedo el enlace es la caja, no la linea. */
@@ -398,10 +404,10 @@ footer ul{list-style:none; padding:0; margin:0; display:grid; gap:11px}
   footer ul{gap:0}
   footer ul a,.f-marca .marca{display:flex; align-items:center; min-height:44px}}
 footer a{text-decoration:none; transition:color var(--t-ui) var(--e)}
-@media (hover:hover) and (pointer:fine){footer a:hover{color:var(--zp-papel)}}
+@media (hover:hover) and (pointer:fine){footer a:hover{color:var(--zp-tinta)}}
 .f-bajo{margin-top:var(--s8); padding-top:var(--s5); border-top:1px solid var(--zp-linea-n);
   display:flex; flex-wrap:wrap; gap:var(--s4); justify-content:space-between; font-size:13px;
-  color:rgba(242,237,227,.62)}
+  color:rgba(250,246,238,.62)}
 .f-bajo p{margin:0; max-width:62ch}
 .arriba{position:fixed; right:var(--pad); bottom:24px; z-index:45; width:46px; height:46px;
   border-radius:50%; background:var(--zp-tinta); color:var(--zp-papel); display:grid;
@@ -420,7 +426,7 @@ footer a{text-decoration:none; transition:color var(--t-ui) var(--e)}
 @media (prefers-reduced-motion:reduce){
   .rev,.w{opacity:1 !important; transform:none !important; filter:none !important; transition:none}
   .sub::before{transform:scaleX(1) !important; transition:none}
-  .sub{color:var(--zp-tinta) !important}
+  .sub{color:var(--zp-marca) !important}
   .modo .barra{transform:scaleX(1) !important}
   .hero-abajo span{animation:none}
   .port{transform:none !important}

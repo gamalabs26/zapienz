@@ -6,17 +6,18 @@
 <title>Esta página no la hemos abierto — Zapienz</title>
 <meta name="description" content="La página que buscabas no existe en Zapienz. Te regresamos al inicio y al catálogo de 305 libros resumidos en español.">
 <meta name="robots" content="noindex, follow">
-<meta name="theme-color" content="#F2EDE3">
+<meta name="theme-color" content="#0D1726">
 <link rel="icon" href="/zapienz/assets/app/icon-512.png" sizes="512x512">
 <link rel="apple-touch-icon" href="/zapienz/assets/app/icon-180.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --zp-papel:#F2EDE3; --zp-tinta:#12100D; --zp-grafito:#5A534A;
-  --zp-marca:#F2B705; --zp-marca-tinta:#8A6400; --zp-onda:#19D3C5;
-  --zp-linea:rgba(18,16,13,.14);
+  --zp-papel:#0D1726; --zp-tinta:#FAF6EE; --zp-grafito:#9DAAC0;
+  --zp-marca:#38EB6B; --zp-marca-tinta:#38EB6B; --zp-onda:#19D3C5;
+  --zp-noche:#04070D;
+  --zp-linea:rgba(250,246,238,.14);
   --e:cubic-bezier(.16,.8,.3,1); --t-ui:.16s;
   --s4:16px; --s5:24px;
   --pad:clamp(20px,5vw,64px);
@@ -24,7 +25,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0; background:var(--zp-papel); color:var(--zp-tinta);
-  font-family:'Manrope',ui-sans-serif,sans-serif; font-size:17px; line-height:1.62;
+  font-family:'Inter',ui-sans-serif,sans-serif; font-size:17px; line-height:1.62;
   -webkit-font-smoothing:antialiased; min-height:100svh; overflow-x:clip;
   display:flex; flex-direction:column}
 img{max-width:100%; height:auto; display:block}
@@ -39,7 +40,7 @@ a{color:inherit}
 
 .tope{padding-block:clamp(20px,4vw,32px)}
 .marca{display:inline-flex; align-items:center; gap:10px; text-decoration:none;
-  font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:19px; letter-spacing:-.02em}
+  font-family:'Instrument Serif',Georgia,serif; font-weight:400; font-size:20px; letter-spacing:-.02em}
 .marca img{width:30px; height:30px; border-radius:8px}
 
 main{flex:1; display:flex; align-items:center; padding-block:clamp(28px,7vw,72px)}
@@ -49,16 +50,17 @@ main{flex:1; display:flex; align-items:center; padding-block:clamp(28px,7vw,72px
   display:flex; align-items:center; gap:12px; margin:0 0 var(--s5)}
 .codigo::before{content:''; width:34px; height:2px; background:var(--zp-marca); border-radius:2px}
 
-h1{font-family:'Fraunces',Georgia,serif; font-weight:600; line-height:1.03;
-  font-size:clamp(2.15rem,6vw,4.2rem); letter-spacing:-.028em; margin:0 0 var(--s5);
-  max-width:17ch; font-variation-settings:'SOFT' 22,'WONK' 1}
+h1{font-family:'Instrument Serif',Georgia,serif; font-weight:400; line-height:1.07;
+  font-size:clamp(2.3rem,6.4vw,4.5rem); letter-spacing:-.018em; margin:0 0 var(--s5);
+  max-width:17ch}
 
 /* El subrayado es la firma del sitio: en el resto de las paginas cubre la palabra
    entera. Aqui se corta a media palabra y la deja sin terminar, que es exactamente
    lo que le pasa a esta pagina. El concepto es la estructura, no el adorno. */
-.corta{position:relative; display:inline-block; white-space:nowrap; isolation:isolate}
-.corta::before{content:''; position:absolute; left:-.06em; right:-.06em; bottom:.05em;
-  height:.42em; background:var(--zp-marca); border-radius:2px; z-index:-1;
+.corta{position:relative; display:inline-block; white-space:nowrap; isolation:isolate;
+  font-style:italic; color:var(--zp-marca)}
+.corta::before{content:''; position:absolute; left:-.04em; right:-.04em; bottom:-.02em;
+  height:.055em; background:var(--zp-marca); border-radius:2px; opacity:.55;
   transform:scaleX(0); transform-origin:0 50%;
   animation:corta 1.35s var(--e) .3s both}
 @keyframes corta{to{transform:scaleX(.56)}}
@@ -71,11 +73,11 @@ h1{font-family:'Fraunces',Georgia,serif; font-weight:600; line-height:1.03;
   font-weight:700; font-size:15.5px; letter-spacing:-.012em;
   border:1.5px solid transparent; border-radius:100px; padding:14px 24px;
   min-height:48px; transition:transform var(--t-ui) var(--e), background var(--t-ui) var(--e)}
-.btn-1{background:var(--zp-tinta); color:var(--zp-papel)}
+.btn-1{background:var(--zp-marca); color:var(--zp-noche)}
 .btn-2{border-color:var(--zp-linea); color:var(--zp-tinta)}
 @media (hover:hover) and (pointer:fine){
   .btn-1:hover{transform:translateY(-2px)}
-  .btn-2:hover{background:rgba(18,16,13,.05)}
+  .btn-2:hover{background:rgba(250,246,238,.07)}
 }
 /* Mismo acuse al presionar que en el resto del sitio (index.html:140): sin esto,
    los dos unicos botones de esta pagina se sienten muertos al tacto en movil,
