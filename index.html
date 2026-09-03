@@ -29,7 +29,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://gamalabs26.github.io/zapienz/#org","name":"Zapienz","email":"contactozapienz@gmail.com","url":"https://gamalabs26.github.io/zapienz/","logo":"https://gamalabs26.github.io/zapienz/assets/app/icon-512.png","sameAs":["https://www.instagram.com/zapienz_latam","https://apps.apple.com/mx/app/zapienz/id6762142820"]},
-{"@type":"SoftwareApplication","name":"Zapienz","applicationCategory":"EducationApplication","operatingSystem":"iOS","inLanguage":"es","url":"https://apps.apple.com/mx/app/zapienz/id6762142820","publisher":{"@id":"https://gamalabs26.github.io/zapienz/#org"},"description":"305 libros de no ficción resumidos en español, en texto y audio, de unos 20 minutos cada uno.","aggregateRating":{"@type":"AggregateRating","ratingValue":"5","ratingCount":"3","bestRating":"5"},
+{"@type":"SoftwareApplication","name":"Zapienz","applicationCategory":"EntertainmentApplication","operatingSystem":"iOS","inLanguage":"es","url":"https://apps.apple.com/mx/app/zapienz/id6762142820","publisher":{"@id":"https://gamalabs26.github.io/zapienz/#org"},"description":"305 libros de no ficción resumidos en español, en texto y audio, de unos 20 minutos cada uno.","aggregateRating":{"@type":"AggregateRating","ratingValue":"5","ratingCount":"3","bestRating":"5"},
 "review":[
 {"@type":"Review","author":{"@type":"Person","name":"Cborbog"},"datePublished":"2026-05-13","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"name":"Lo recomiendo !","reviewBody":"Hoy en día los podcast me ayudado a aprender de una manera más rápida y diferente y sin duda esta aplicación lo ha hecho aún mejor, ya que al juntar la ideología de un podcast con el resumen de un libro , hace que puedas aprender de manera mas fácil sobre diferentes best sellers."},
 {"@type":"Review","author":{"@type":"Person","name":"alemndza98"},"datePublished":"2026-05-09","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"name":"Me encantó la app","reviewBody":"Súper práctica app, están buenísimos y súper completos los resúmenes. Es muy práctico escuchar el audio mientras voy manejado y los libros que tienen están muy interesantes ✨"}]}]}
@@ -149,8 +149,8 @@ section{position:relative}
     radial-gradient(90px 60px at 58% 66%, rgba(242,237,227,.08), transparent 70%)}
 .hero-scrim{position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
-   linear-gradient(96deg, rgba(4,7,11,.93) 0%, rgba(4,7,11,.78) 34%, rgba(4,7,11,.24) 62%, rgba(4,7,11,.5) 100%),
-   linear-gradient(to top, rgba(4,7,11,.92) 0%, rgba(4,7,11,0) 46%)}
+   linear-gradient(96deg, rgba(4,7,11,.95) 0%, rgba(4,7,11,.87) 36%, rgba(4,7,11,.32) 64%, rgba(4,7,11,.58) 100%),
+   linear-gradient(to top, rgba(4,7,11,.96) 0%, rgba(4,7,11,.76) 20%, rgba(4,7,11,.2) 44%, rgba(4,7,11,0) 60%)}
 .hero .env{position:relative; z-index:3; padding-block:clamp(96px,14vh,150px) clamp(40px,7vh,72px); width:100%; will-change:transform}
 .hero-pill{display:inline-flex; align-items:center; gap:9px; font-size:12.5px; font-weight:600;
   letter-spacing:.1em; text-transform:uppercase; color:rgba(242,237,227,.74);
@@ -318,8 +318,10 @@ h2 em{font-style:italic;font-weight:400}
 .repro .wave rect.on{fill:var(--zp-onda)}
 .repro .tiempo{font-family:'IBM Plex Mono',monospace; font-size:14px; color:rgba(242,237,227,.7);
   white-space:nowrap}
-.shots{display:flex; gap:var(--s5); margin-top:var(--s8); justify-content:center; flex-wrap:wrap}
-.shots img{width:clamp(160px,20vw,225px); border-radius:20px; border:1px solid var(--zp-linea-n);
+/* La holgura extra no es estetica: el parallax de estas capturas las sube hasta
+   59px (tope = vh * k * 0.6) y sin ella mordian el reproductor de arriba. */
+.shots{display:flex; gap:var(--s5); margin-top:calc(var(--s8) + 44px); justify-content:center; flex-wrap:wrap}
+.shots img{width:clamp(160px,20vw,225px); height:auto; border-radius:20px; border:1px solid var(--zp-linea-n);
   will-change:transform}
 
 /* ─────────── RESEÑAS ─────────── */
@@ -388,6 +390,10 @@ footer .env{padding-block:var(--s8) var(--s7)}
 footer .f-top h3{font-size:12.5px; letter-spacing:.13em; text-transform:uppercase; color:rgba(242,237,227,.6);
   margin:0 0 var(--s4); font-weight:700; font-family:'Manrope',sans-serif}
 footer ul{list-style:none; padding:0; margin:0; display:grid; gap:11px}
+/* Minimo tactil de 44px: en pantallas de dedo el enlace es la caja, no la linea. */
+@media (max-width:820px){
+  footer ul{gap:0}
+  footer ul a,.f-marca .marca{display:flex; align-items:center; min-height:44px}}
 footer a{text-decoration:none; transition:color var(--t-ui) var(--e)}
 @media (hover:hover) and (pointer:fine){footer a:hover{color:var(--zp-papel)}}
 .f-bajo{margin-top:var(--s8); padding-top:var(--s5); border-top:1px solid var(--zp-linea-n);
@@ -418,6 +424,19 @@ footer a{text-decoration:none; transition:color var(--t-ui) var(--e)}
   html{scroll-behavior:auto}
 }
 </style>
+<noscript><style>
+  /* Sin JS la pagina se lee completa: los reveals nacen revelados y el muro deja
+     de ser un carril animado de 230vh para volverse una rejilla en flujo normal. */
+  .rev,.w{opacity:1; transform:none; filter:none}
+  .sub::before{transform:scaleX(1)}
+  .modo .barra{transform:scaleX(1)}
+  .muro-wrap{height:auto}
+  .muro-pin{position:static; height:auto; padding-block:clamp(72px,11vw,128px) 0}
+  .muro-tit{position:static; padding-inline:0; margin-bottom:var(--s6)}
+  .muro-fade{display:none}
+  .fila{flex-wrap:wrap; width:auto; justify-content:center}
+  .busca form,.repro .wave{display:none}
+</style></noscript>
 </head>
 <body>
 <a class="skip" href="#principal">Saltar al contenido</a>
@@ -493,7 +512,7 @@ footer a{text-decoration:none; transition:color var(--t-ui) var(--e)}
     <ul class="lista">
       <li class="rev"><i>01</i><span><b>En español, no traducido a medias</b><p>El catálogo entero está en español, pensado para lectores de Latinoamérica.</p></span></li>
       <li class="rev"><i>02</i><span><b>Texto y audio del mismo Zap</b><p>El mismo resumen se lee o se escucha, narrado de principio a fin. Tú decides cada día.</p></span></li>
-      <li class="rev"><i>03</i><span><b>Diez categorías</b><p>Psicología, negocios, filosofía, hábitos, productividad, relaciones, desarrollo personal y más.</p></span></li>
+      <li class="rev"><i>03</i><span><b>Diez categorías</b><p>Psicología, negocios, filosofía, hábitos y más.</p></span></li>
       <li class="rev"><i>04</i><span><b>Títulos nuevos cada semana</b><p>El catálogo no se queda quieto: se publican títulos nuevos con su audio listo.</p></span></li>
     </ul>
   </div>
@@ -535,7 +554,38 @@ footer a{text-decoration:none; transition:color var(--t-ui) var(--e)}
   <div class="muro-wrap" id="muroWrap">
     <div class="muro-pin">
       <div class="muro-tit"><h2>Trescientos cinco, y <span class="sub" data-sub><span class="t">creciendo</span></span>.</h2></div>
-      <div id="muro"></div>
+      <div id="muro">
+      <div class="fila">
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="El Arte de Pensar Claramente, de Rolf Dobelli — ver en el App Store"><img src="assets/portadas/00.webp" alt="Portada del Zap de El Arte de Pensar Claramente" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Háblame Bonito, de Vanessa Van Edwards — ver en el App Store"><img src="assets/portadas/01.webp" alt="Portada del Zap de Háblame Bonito" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Quiet: El Poder de los Introvertidos, de Susan Cain — ver en el App Store"><img src="assets/portadas/02.webp" alt="Portada del Zap de Quiet: El Poder de los Introvertidos" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="La Sociedad del Cansancio, de Byung-Chul Han — ver en el App Store"><img src="assets/portadas/03.webp" alt="Portada del Zap de La Sociedad del Cansancio" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Factfulness, de Hans Rosling — ver en el App Store"><img src="assets/portadas/04.webp" alt="Portada del Zap de Factfulness" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Cómo Mandar a la Mierda de Forma Educada, de Alba Cardalda — ver en el App Store"><img src="assets/portadas/05.webp" alt="Portada del Zap de Cómo Mandar a la Mierda de Forma Educada" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Bullshit Jobs, de David Graeber — ver en el App Store"><img src="assets/portadas/06.webp" alt="Portada del Zap de Bullshit Jobs" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Atrévete a No Gustar, de Ichiro Kishimi — ver en el App Store"><img src="assets/portadas/07.webp" alt="Portada del Zap de Atrévete a No Gustar" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="El Poder de los 5 Segundos, de Mel Robbins — ver en el App Store"><img src="assets/portadas/08.webp" alt="Portada del Zap de El Poder de los 5 Segundos" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="La Buena Suerte, de Alex Rovira — ver en el App Store"><img src="assets/portadas/09.webp" alt="Portada del Zap de La Buena Suerte" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Tu Cerebro Manda, de John Medina — ver en el App Store"><img src="assets/portadas/10.webp" alt="Portada del Zap de Tu Cerebro Manda" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Mujeres y Poder, de Mary Beard — ver en el App Store"><img src="assets/portadas/11.webp" alt="Portada del Zap de Mujeres y Poder" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Redefine Imposible, de Jonathan Benito — ver en el App Store"><img src="assets/portadas/12.webp" alt="Portada del Zap de Redefine Imposible" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Aprende más Rápido, de Ulrich Boser — ver en el App Store"><img src="assets/portadas/13.webp" alt="Portada del Zap de Aprende más Rápido" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="La Tercera Ola, de Steve Case — ver en el App Store"><img src="assets/portadas/14.webp" alt="Portada del Zap de La Tercera Ola" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Minimalismo, de Joshua Fields Millburn — ver en el App Store"><img src="assets/portadas/15.webp" alt="Portada del Zap de Minimalismo" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Tiende tu Cama, de William H. McRaven — ver en el App Store"><img src="assets/portadas/16.webp" alt="Portada del Zap de Tiende tu Cama" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Pensamiento Lateral, de Edward de Bono — ver en el App Store"><img src="assets/portadas/17.webp" alt="Portada del Zap de Pensamiento Lateral" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="12 Reglas para Vivir, de Jordan B. Peterson — ver en el App Store"><img src="assets/portadas/18.webp" alt="Portada del Zap de 12 Reglas para Vivir" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="El Camino del Artista, de Julia Cameron — ver en el App Store"><img src="assets/portadas/19.webp" alt="Portada del Zap de El Camino del Artista" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Innovación Abierta, de Henry Chesbrough — ver en el App Store"><img src="assets/portadas/20.webp" alt="Portada del Zap de Innovación Abierta" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="La Singularidad está Cerca, de Ray Kurzweil — ver en el App Store"><img src="assets/portadas/21.webp" alt="Portada del Zap de La Singularidad está Cerca" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Sprint, de Jake Knapp — ver en el App Store"><img src="assets/portadas/22.webp" alt="Portada del Zap de Sprint" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="El Futuro es más Rápido de lo que Piensas, de Peter Diamandis — ver en el App Store"><img src="assets/portadas/23.webp" alt="Portada del Zap de El Futuro es más Rápido de lo que Piensas" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Abundancia, de Peter Diamandis — ver en el App Store"><img src="assets/portadas/24.webp" alt="Portada del Zap de Abundancia" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Lo Inevitable, de Kevin Kelly — ver en el App Store"><img src="assets/portadas/25.webp" alt="Portada del Zap de Lo Inevitable" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="Inner Excellence, de Jim Afremow — ver en el App Store"><img src="assets/portadas/26.webp" alt="Portada del Zap de Inner Excellence" loading="lazy" width="150" height="225"></a>
+        <a class="port" href="https://apps.apple.com/mx/app/zapienz/id6762142820" target="_blank" rel="noopener" aria-label="El Curso Fénix, de Brian Tracy — ver en el App Store"><img src="assets/portadas/27.webp" alt="Portada del Zap de El Curso Fénix" loading="lazy" width="150" height="225"></a>
+      </div>
+      </div>
       <div class="muro-fade" aria-hidden="true"></div>
     </div>
   </div>
@@ -550,7 +600,8 @@ footer a{text-decoration:none; transition:color var(--t-ui) var(--e)}
       <div class="hall" id="hall" role="status" aria-live="polite"></div>
       <p style="margin-top:14px;font-size:13.5px;color:var(--zp-grafito)">Aquí enseñamos 28 títulos de muestra. El catálogo completo son 305, dentro de la app.</p>
     </div>
-    <div class="cats rev" id="cats"></div>
+    <p class="rev" style="margin:var(--s6) 0 0;font-size:13.5px;color:var(--zp-grafito)">Las categorías de estos 28:</p>
+    <div class="cats rev" id="cats" style="margin-top:var(--s3)"><span class="cat">Desarrollo personal</span><span class="cat">Filosofía</span><span class="cat">Hábitos</span><span class="cat">Negocios</span><span class="cat">Productividad</span><span class="cat">Psicología</span><span class="cat">Relaciones</span></div>
   </div>
 </section>
 
@@ -582,9 +633,9 @@ footer a{text-decoration:none; transition:color var(--t-ui) var(--e)}
       <span class="tiempo"><span id="tActual">07:24</span> / 20:00</span>
     </div>
     <div class="shots">
-      <img class="rev" src="assets/app/shot1.webp" alt="Pantalla de inicio de Zapienz con la biblioteca de Zaps" loading="lazy" width="205" height="440" data-par="0.05">
-      <img class="rev" src="assets/app/shot3.webp" alt="Pantalla de lectura de un Zap en Zapienz" loading="lazy" width="205" height="440" data-par="0.11">
-      <img class="rev" src="assets/app/shot6.webp" alt="Reproductor de audio de un Zap en Zapienz" loading="lazy" width="205" height="440" data-par="0.05">
+      <img class="rev" src="assets/app/shot1.webp" alt="Pantalla de inicio de Zapienz: los Zaps empezados y los más populares." loading="lazy" width="434" height="880" data-par="0.05">
+      <img class="rev" src="assets/app/shot3.webp" alt="Ficha de un Zap con los dos botones: escucharlo o leerlo." loading="lazy" width="436" height="880" data-par="0.11">
+      <img class="rev" src="assets/app/shot6.webp" alt="Un Zap abierto en modo lectura, con el reproductor de audio abajo." loading="lazy" width="436" height="880" data-par="0.05">
     </div>
   </div>
 </section>
@@ -739,7 +790,7 @@ document.getElementById('anio').textContent = new Date().getFullYear();
 (function(){
   var v = document.getElementById('heroVid');
   if(!v) return;
-  var FADE = 0.45, sinCostura = { fundiendo:false, raf:0 };
+  var sinCostura = { raf:0, ultimo:-1, quieta:0 };
 
   function pintar(o){ v.style.opacity = o.toFixed(3); }
   function fundir(desde, hasta, ms, fin){
@@ -753,22 +804,26 @@ document.getElementById('anio').textContent = new Date().getFullYear();
     })(t0);
   }
 
+  var entro = false;
+  function entrar(){ if(entro) return; entro = true; fundir(parseFloat(v.style.opacity||'0'), 1, 600); }
   pintar(0);
-  v.addEventListener('loadeddata', function(){ fundir(0,1,600); }, {once:true});
+  if(v.readyState >= 2) entrar();                       // ya habia cargado antes de este script
+  v.addEventListener('loadeddata', entrar);
+  v.addEventListener('canplay',   entrar);
+  setTimeout(function(){ if(!entro){ entro = true; pintar(1); } }, 2500);  // red: nunca se queda invisible
 
+  // Vigilante del bucle: NO atenua. Si el tiempo deja de avanzar con el video en
+  // play (pestana que vuelve del fondo, decodificador atorado), lo devuelve al
+  // cuadro 0 y lo reanuda. Nunca toca la opacidad, asi que no puede dejarlo a medias.
   v.addEventListener('timeupdate', function(){
-    if(!v.duration || sinCostura.fundiendo) return;
-    if(v.duration - v.currentTime <= FADE){
-      sinCostura.fundiendo = true;
-      fundir(1, .55, FADE*1000);
-    }
+    if(!v.duration) return;
+    if(Math.abs(v.currentTime - sinCostura.ultimo) < 0.004){
+      if(++sinCostura.quieta > 10 && !v.paused){
+        sinCostura.quieta = 0; v.currentTime = 0; var r = v.play(); if(r && r.catch) r.catch(function(){});
+      }
+    } else sinCostura.quieta = 0;
+    sinCostura.ultimo = v.currentTime;
   });
-  function reinicio(){
-    sinCostura.fundiendo = false;
-    fundir(parseFloat(v.style.opacity||'1'), 1, 420);
-  }
-  v.addEventListener('seeked', reinicio);
-  v.addEventListener('play',  reinicio);
   v.addEventListener('ended', function(){ v.currentTime = 0; v.play(); });
 
   // el autoplay puede quedar bloqueado: el póster ya está detrás, pero se reintenta
@@ -795,7 +850,10 @@ document.getElementById('anio').textContent = new Date().getFullYear();
     for(var i=0;i<est.length;i++){
       var s = est[i], r = s.el.getBoundingClientRect();
       var centro = r.top + r.height/2 - vh/2;
-      s.meta = -centro * s.k;
+      // Tope: sin el, una capa lejos del centro acumula cientos de px y se sale de
+      // su seccion (medido: -435px, tapando el texto de la seccion siguiente).
+      var tope = vh * Math.abs(s.k) * 0.6;
+      s.meta = Math.max(-tope, Math.min(tope, -centro * s.k));
       s.y = lerp(s.y, s.meta, .12);
       if(Math.abs(s.y - s.meta) < .05) s.y = s.meta;
       s.el.style.transform = 'translate3d(0,' + s.y.toFixed(2) + 'px,0)';
@@ -879,6 +937,7 @@ var portada = function(f){ return 'assets/portadas/'+f+'.webp'; };
 (function(){
   var muro = document.getElementById('muro'), wrap = document.getElementById('muroWrap');
   if(!muro) return;
+  muro.innerHTML = '';                     // el HTML trae la rejilla sin JS; aqui se re-arma en carriles
   var FILAS = innerWidth < 760 ? 3 : 3;
   var orden = LIBROS.concat(LIBROS);       // duplicado: la fila nunca se queda corta
   var porFila = Math.ceil(orden.length / FILAS);
@@ -1041,14 +1100,6 @@ var portada = function(f){ return 'assets/portadas/'+f+'.webp'; };
 
 /* ══════════════ Categorías + buscador ══════════════ */
 (function(){
-  var cats = document.getElementById('cats');
-  if(cats){
-    var vistas = {};
-    LIBROS.forEach(function(L){ vistas[L[3]] = 1; });
-    Object.keys(vistas).sort().forEach(function(c){
-      var s = document.createElement('span'); s.className = 'cat'; s.textContent = c; cats.appendChild(s);
-    });
-  }
   var q = document.getElementById('q'), hall = document.getElementById('hall'),
       form = document.getElementById('buscaForm');
   if(!q) return;
